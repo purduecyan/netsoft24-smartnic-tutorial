@@ -127,5 +127,3 @@ To compile,
 Executing the application. Replace *auxiliary device name* by the corresponding created SFs. 
 
 ./doca_flow_hairpin_vnf -a auxiliary:mlx5_core.sf.4,dv_flow_en=2 -a auxiliary:mlx5_core.sf.5,dv_flow_en=2 -- -l 60
-
-# netsoft24-smartnic-tutorial-
