@@ -112,7 +112,7 @@ First, export the DOCA lib path:
 
 Clone this repository with the sample DOCA code. 
 
-`git clone https://github.com/smartness2030/sbrc24-minicurso-smartnic.git`
+`git clone https://github.com/smartness2030/netsoft24-smartnic-tutorial.git`
 
 Access directory flow_hairping_vnf code. 
 
