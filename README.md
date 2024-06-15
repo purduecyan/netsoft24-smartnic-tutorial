@@ -10,7 +10,7 @@ We set a server having a Nvidia BlueField-2 to our activitiy. First we need to a
 - BlueField: IP 192.168.100.2 (usr: netsoft24, psw: netsoft24@usa)
 
 - Everything needs to be executed as `root`
-
+- We recommend to perform all ssh connections with "-o ServerAliveInterval=10" -> "ssh -o ServerAliveInterval=10 netsoft24@200.132.136.81"
 ## Step 1: Understanding how BlueField steer network traffic
 
 - **Goal 1:** understand how physical ports and virtual ports are interconnected in the BlueField
