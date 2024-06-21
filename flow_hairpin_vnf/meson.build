@@ -40,16 +40,16 @@ sample_srcs = [
 	# Main function for the sample's executable
 	SAMPLE_NAME + '_main.c',
 	# Common code for the DOCA library samples
-	'../flow_common.c',
+	'/opt/mellanox/doca/samples/doca_flow/flow_common.c',
 	# Common code for all DOCA applications
-	'../../../applications/common/dpdk_utils.c',
+	'/opt/mellanox/doca/applications/common/dpdk_utils.c',
 ]
 
 sample_inc_dirs  = []
 # Common DOCA library logic
-sample_inc_dirs += include_directories('..')
+sample_inc_dirs += include_directories('/opt/mellanox/doca/samples/doca_flow/')
 # Common DOCA logic (applications)
-sample_inc_dirs += include_directories('../../../applications/common/')
+sample_inc_dirs += include_directories('/opt/mellanox/doca/applications/common/')
 
 executable('doca_' + SAMPLE_NAME, sample_srcs,
 	c_args : '-Wno-missing-braces',
