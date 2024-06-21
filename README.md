@@ -108,6 +108,9 @@ We will now go over a simple DOCA application that is based on the DOCA Flow lib
 
 ### Understanding the compilation and executions steps
 
+
+Let's recreate two SFs. Each SF is attached to a different OVS bridge.
+
 First, export the DOCA lib path:
 
 `export PKG_CONFIG_PATH=:/opt/mellanox/doca/lib/aarch64-linux-gnu/pkgconfig:/opt/mellanox/dpdk/lib/aarch64-linux-gnu/pkgconfig:/opt/mellanox/flexio/lib/pkgconfig`
@@ -116,7 +119,7 @@ Clone this repository with the sample DOCA code.
 
 `git clone https://github.com/smartness2030/netsoft24-smartnic-tutorial.git`
 
-Access directory flow_hairping_vnf code. 
+Access directory flow_hairping_vnf code. Change file flow_hairpin_vnf_sample.c so as to match in one of the subnets. Configure OVS flow rules to make the app receive packets. 
 
 To compile, 
 
@@ -128,4 +131,9 @@ To compile,
 
 Executing the application. Replace *auxiliary device name* by the corresponding created SFs. 
 
-./doca_flow_hairpin_vnf -a auxiliary:mlx5_core.sf.4,dv_flow_en=2 -a auxiliary:mlx5_core.sf.5,dv_flow_en=2 -- -l 60
+**IMPORTANT:** change in the command bellow the SF index, and the file prefix.
+
+./doca_flow_hairpin_vnf -a auxiliary:mlx5_core.sf.3,dv_flow_en=2 -a auxiliary:mlx5_core.sf.5,dv_flow_en=2 --file-prefix mylog -- -l 60
+
+
+## Step 3: Programming the SmartNIC with DOCA / ARM
