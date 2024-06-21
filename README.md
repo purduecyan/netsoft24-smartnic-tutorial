@@ -61,9 +61,14 @@ Traffic steering is done by the eSwitch in the BlueField. If we want to make sur
 
 Add the SF  representator netdev to the OVS bridge. Important: check the representator netdev name by running `mlnx-sf -a show`. Ensure to connect SF to the same bridge that interconnect the physical port that SF is attached to.
 
-`ovs-vsctl add-port ovsbr1 en3f0pf0sf10`
+`ovs-vsctl add-port ovsbr1 en3f0pf0sf10` 
 
 `ovs-vsctl add-port ovsbr2 en3f1pf1sf10` 
+
+Set an IP to the appropriate netdev device. In this case, the netdev is "enp3s0f0s10" (and its netdev representator en3f0pf0sf10). 
+Set an IP in one the following subnets: 12.12.[1-50].0/24 (except the address ending .20 -> this is our server in each subnet) 
+For instance: ifconfig enp3s0f0s10 12.12.30.1/24 up 
+
 
 To verify, run: 
 
@@ -71,9 +76,9 @@ To verify, run:
 
 In addition to that, we need to add flow entries to OVS (or to the eSwitch in the BlueField) so that packets can move between interfaces and SFs.
 
-`ovs-ofctl add-flow ovsbr1 in_port=p0,actions=output:en3f0pf0sf10`
+`ovs-ofctl add-flow ovsbr1 ip,nw_dst=12.12.30.1,in_port=p0,actions=output:en3f0pf0sf10`
 
-`ovs-ofctl add-flow ovsbr1 in_port=en3f0pf0sf10,actions=output:p0`
+`ovs-ofctl add-flow ovsbr1 ip,nw_src=12.12.30.1,in_port=en3f0pf0sf10,actions=output:p0`
 
 `ovs-ofctl add-flow ovsbr2 in_port=p1,actions=output:en3f1pf1sf10`
 
@@ -87,17 +92,14 @@ To verify flow entries:
 
 ### Testing connectivity
 
-- Gateway: IP 200.132.136.81 (usr: sbrc24, psw: sbrc2024@niteroi)
-- Traffic Generator: IP 10.10.10.30 (usr: sbrc24, psw: sbrc2024@niteroi)
-
-- Set up IP in for interfaces in the Traffic Generator (enp7s0f0 and enp7s0f1). For instance: enp7s0f0 40.40.40.2/24
 - Set up an IP to SFs in the same subnet and ping them from the traffic generator. **Important:** set up ip to the SF netdev representator (`mlnx-sf -a show`)
  
 - At this point, ping should work. To see packets, run:
 `ovs-ofctl dump-flows ovsbr1`
 `ovs-ofctl dump-flows ovsbr2`
 
-
+- Step 1: ping -I enp3s0f0s10 12.12.30.20
+- Step 2: iperf -c 12.12.30.20
 
 ## Step 2: Programming the SmartNIC with DOCA
 
