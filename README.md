@@ -5,9 +5,9 @@ We will demonstrate the step-by-step process of setting up a DOCA application. F
 ## Getting Acess the BlueField Server
 
 We set a server having a Nvidia BlueField-2 to our activitiy. First we need to access our gateway, then we jump to our server. Finally we access the BlueField. 
-- Gateway: IP 200.132.136.81 (usr: netsoft24, psw: netsoft24@usa)
-- Server: IP 10.10.10.202 (usr: netsoft24, psw: netsoft24@usa)
-- BlueField: IP 192.168.100.2 (usr: netsoft24, psw: netsoft24@usa)
+- Gateway: IP 200.132.136.81 (usr: netsoft24, psw: netsoft24)
+- Server: IP 10.10.10.202 (usr: netsoft24, psw: netsoft24)
+- BlueField: IP 192.168.100.2 (usr: netsoft24, psw: netsoft24)
 
 - Everything needs to be executed as `root`
 - We recommend to perform all ssh connections with "-o ServerAliveInterval=10" -> "ssh -o ServerAliveInterval=10 netsoft24@200.132.136.81"
