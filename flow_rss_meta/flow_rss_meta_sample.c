@@ -58,18 +58,15 @@ process_packets(int ingress_port)
 	nb_packets = rte_eth_rx_burst(ingress_port, queue_index, packets, PACKET_BURST);
 
 
-
-
 	for (i = 0; i < nb_packets; i++) {
 		struct rte_ether_hdr *eth_hdr = rte_pktmbuf_mtod(packets[i], struct rte_ether_hdr *);
 		uint16_t ether_type = rte_be_to_cpu_16(eth_hdr->ether_type);
-//		DOCA_LOG_INFO("Ethertype: %d", ether_type);
 		
                  if(ether_type == 2048){
 		        struct rte_ipv4_hdr *ip_hdr = (struct rte_ipv4_hdr *)((char *)eth_hdr + sizeof(struct rte_ether_hdr));
                         rte_be32_t src_addr = ip_hdr->src_addr;         
         		rte_be32_t dst_addr = ip_hdr->dst_addr;
-		        num_pack_flow[(src_addr + dst_addr) % MAX_FLOW] += 1; 	
+		        num_pack_flow[(src_addr + dst_addr) % MAX_FLOW] = 1; 	
 	         }
 
 	}
