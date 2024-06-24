@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "flow_common.h": "c",
+        "rte_ethdev.h": "c",
+        "string.h": "c",
+        "doca_flow.h": "c",
+        "doca_log.h": "c",
+        "unistd.h": "c",
+        "rte_ether.h": "c",
+        "doca_compat.h": "c",
+        "doca_config.h": "c",
+        "doca_build_config.h": "c",
+        "bit": "c",
+        "*.tcc": "c",
+        "functional": "c",
+        "tuple": "c",
+        "rte_compat.h": "c",
+        "rte_ip.h": "c",
+        "rte_crc_generic.h": "c",
+        "rte_atomic.h": "c",
+        "rte_atomic_64.h": "c",
+        "rte_mbuf.h": "c"
+    }
+}
