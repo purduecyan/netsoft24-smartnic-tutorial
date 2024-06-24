@@ -57,17 +57,14 @@ process_packets(int ingress_port)
 	
 	nb_packets = rte_eth_rx_burst(ingress_port, queue_index, packets, PACKET_BURST);
 
-	
-	/*if (nb_packets)
- 		DOCA_LOG_INFO("Port %d: Received %d packets", ingress_port, nb_packets);
-	*/
+
+
+
 	for (i = 0; i < nb_packets; i++) {
-		//rte_pktmbuf_mtod
 		struct rte_ether_hdr *eth_hdr = rte_pktmbuf_mtod(packets[i], struct rte_ether_hdr *);
 		uint16_t ether_type = rte_be_to_cpu_16(eth_hdr->ether_type);
-		DOCA_LOG_INFO("Ethertype: %d", ether_type);
+//		DOCA_LOG_INFO("Ethertype: %d", ether_type);
 		
-		//if (eth_hdr->ether_type == htons(ETHER_TYPE_IPv4)) {
                  if(ether_type == 2048){
 		        struct rte_ipv4_hdr *ip_hdr = (struct rte_ipv4_hdr *)((char *)eth_hdr + sizeof(struct rte_ether_hdr));
                         rte_be32_t src_addr = ip_hdr->src_addr;         
@@ -75,12 +72,10 @@ process_packets(int ingress_port)
 		        num_pack_flow[(src_addr + dst_addr) % MAX_FLOW] += 1; 	
 	         }
 
-		/*if (rte_flow_dynf_metadata_avail())
-			DOCA_LOG_INFO("Packet %d meta data %d", i, *RTE_FLOW_DYNF_METADATA(packets[i]));*/
 	}
 
-	DOCA_LOG_INFO("current num flows %d", count_flows());
-	
+//	DOCA_LOG_INFO("current num flows %d", count_flows());
+
 	rte_eth_tx_burst(ingress_port,queue_index,packets,nb_packets);
 }
 
